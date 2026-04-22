@@ -3893,25 +3893,33 @@ const { error: membersError } = await supabaseClient
 
   bindStaticEvents();
 
-  (async function init() {
-    renderStars(state.currentRating);
-    await fetchSessionAndProfile();
+  async function init() {
+  try {
+    // Рендеринг звезды (показать рейтинг)
+    renderStars(state.currentRating);  // Убедитесь, что функция renderStars правильно реализована
 
+    // Загрузка сессии и профиля
+    await fetchSessionAndProfile();  // Убедитесь, что эта функция асинхронно загружает сессию и профиль
+
+    // Проверка сессии и выполнение действий
     if (state.currentSession) {
-      startPresenceHeartbeat();
-      await requestNotificationsIfNeeded();
-      await updatePresence(true);
+      startPresenceHeartBeat();  // Проверка инициализации сердца присутствия
+      await requestNotificationsIfNeeded();  // Запрос на уведомления, если нужно
+      await updatePresence(true);  // Обновление присутствия
     }
 
+    // Параллельная загрузка данных
     await Promise.all([
-      cacheProfiles(),
-      renderPortfolio(),
-      renderReviews(),
-      renderNews(),
-      renderFaqQuestions(),
-      renderContestEntriesAdmin(),
-      searchPeople(),
-      renderMessengerDialogs()
+      cacheProfiles(),  // Кэширование профилей
+      renderPortfolio(),  // Рендеринг портфолио
+      renderReviews(),  // Рендеринг отзывов
+      renderNew(),  // Рендеринг новых данных
+      renderFaqQuestions(),  // Рендеринг вопросов FAQ
+      renderContestEntriesAdmin(),  // Рендеринг записей контестов для администраторов
+      searchPeople(),  // Поиск людей
+      renderMessengerDialogs()  // Рендеринг сообщений
     ]);
-  } , );
-})();
+  } catch (error) {
+    console.error("Ошибка при инициализации:", error);  // Выводим ошибку, если одна из операций не удалась
+  }
+}
