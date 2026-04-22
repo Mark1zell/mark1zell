@@ -3893,52 +3893,26 @@ const { error: membersError } = await supabaseClient
 
   bindStaticEvents();
 
-  async function init() {
-  // Вызовы рендеринга различных разделов
-  renderStars(state.currentRating);
-  await fetchSessionAndProfile();
+  (async function init() {
+    renderStars(state.currentRating);
+    await fetchSessionAndProfile();
 
-  // Проверка текущей сессии и выполнение действий, если она существует
-  if (state.currentSession) {
-    startPresenceHeartBeat();
-    await requestNotificationsIfNeeded();
-    await updatePresence(true);
-  }
+    if (state.currentSession) {
+      startPresenceHeartbeat();
+      await requestNotificationsIfNeeded();
+      await updatePresence(true);
+    }
 
-  // Загрузка всех данных параллельно
-  await Promise.all([
-    cacheProfiles(),
-    renderPortfolio(),
-    renderReviews(),
-    renderNew(),
-    renderFaqQuestions(),
-    renderContestEntriesAdmin(),
-    searchPeople(),
-    renderMessengerDialogs()
-  ]);
-}
-
-// Вызов функции init() для выполнения кода
-init();
-
-// Код для инициализации статических событий
-bindStaticEvents();
-
-// Асинхронная функция для начала работы
-(async function initApp() {
-  await Promise.all([
-    cacheProfiles(),
-    renderPortfolio(),
-    renderReviews(),
-    renderNew(),
-    renderFaqQuestions(),
-    renderContestEntriesAdmin(),
-    searchPeople(),
-    renderMessengerDialogs()
-  ]);
-      // все функции, обработчики и вызовы
-
-  // финальная инициализация
-  init();
-  bindStaticEvents();
+    await Promise.all([
+      cacheProfiles(),
+      renderPortfolio(),
+      renderReviews(),
+      renderNews(),
+      renderFaqQuestions(),
+      renderContestEntriesAdmin(),
+      searchPeople(),
+      renderMessengerDialogs()
+    ]);
+   }
+  });
 })();
