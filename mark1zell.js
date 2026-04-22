@@ -1580,7 +1580,7 @@ const { error: membersError } = await supabaseClient
           ` : ''}
         </div>
       </div>
-    `;
+    });`;
   }
 
   async function renderMessengerDialogs() {
@@ -3913,5 +3913,5 @@ const { error: membersError } = await supabaseClient
       searchPeople(),
       renderMessengerDialogs()
     ]);
-  }
+  } , );
 })();
