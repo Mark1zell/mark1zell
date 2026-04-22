@@ -3913,6 +3913,5 @@ const { error: membersError } = await supabaseClient
       searchPeople(),
       renderMessengerDialogs()
     ]);
-   }
-  });
+  }
 })();
