@@ -3936,5 +3936,9 @@ bindStaticEvents();
     searchPeople(),
     renderMessengerDialogs()
   ]);
-  init();  // Дополнительный вызов функции инициализации
+      // все функции, обработчики и вызовы
+
+  // финальная инициализация
+  init();
+  bindStaticEvents();
 })();
