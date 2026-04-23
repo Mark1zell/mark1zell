@@ -3904,5 +3904,14 @@ bindStaticEvents();
     searchPeople(),
     renderMessengerDialogs()
   ]);
-  init();  // Дополнительный вызов функции инициализации
+});
+  } catch (error) {
+    console.error("Ошибка:", error);
+  }
+}
+
+// запуск основного init, если нужен
+init();
+
+// закрываем IIFE
 })();
