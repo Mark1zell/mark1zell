@@ -3887,31 +3887,23 @@ const { error: membersError } = await supabaseClient
         renderContestEntriesAdmin(),
         searchPeople(),
         renderMessengerDialogs()
-      ]);
-    }, 0);
-  });
+  ]);
+}
 
-  bindStaticEvents();
+init();
 
-  (async function init() {
-    renderStars(state.currentRating);
-    await fetchSessionAndProfile();
+bindStaticEvents();
 
-    if (state.currentSession) {
-      startPresenceHeartbeat();
-      await requestNotificationsIfNeeded();
-      await updatePresence(true);
-    }
-
-    await Promise.all([
-      cacheProfiles(),
-      renderPortfolio(),
-      renderReviews(),
-      renderNews(),
-      renderFaqQuestions(),
-      renderContestEntriesAdmin(),
-      searchPeople(),
-      renderMessengerDialogs()
-    ]);
-  } , );
-})();
+(async function initApp() {
+  await Promise.all([
+    cacheProfiles(),
+    renderPortfolio(),
+    renderReviews(),
+    renderNew(),
+    renderFaqQuestions(),
+    renderContestEntriesAdmin(),
+    searchPeople(),
+    renderMessengerDialogs()
+  ]);
+  init();  // Дополнительный вызов функции инициализации
+})();  // Вот это нужно добавить
