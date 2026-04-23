@@ -3888,7 +3888,6 @@ const { error: membersError } = await supabaseClient
         searchPeople(),
         renderMessengerDialogs()
   ]);
-}
 
 init();
 
@@ -3906,4 +3905,4 @@ bindStaticEvents();
     renderMessengerDialogs()
   ]);
   init();  // Дополнительный вызов функции инициализации
-})();  // Вот это нужно добавить
+})();
